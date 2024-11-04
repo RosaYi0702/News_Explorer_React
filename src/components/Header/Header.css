@@ -1,0 +1,51 @@
+.header {
+  background-color: transparent;
+  padding: 13px 104px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+}
+
+.header__btn {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.header__home-btn {
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  padding: 0 10px;
+  margin: 0 32px;
+  cursor: pointer;
+  position: relative;
+}
+
+.header__home-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -26px;
+  left: 0%;
+  width: 68px;
+  height: 3px;
+  background-color: #fff;
+}
+
+.header__sign-in-btn {
+  border-radius: 50px;
+  border-style: none;
+  outline: 1px #fff solid;
+  padding: 12px;
+  width: 176px;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+}
