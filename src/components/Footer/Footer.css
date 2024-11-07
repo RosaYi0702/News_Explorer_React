@@ -1,0 +1,33 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__copyright {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #b6bcbf;
+}
+
+.footer__button-list {
+  display: flex;
+  width: 275px;
+  padding: 28px 104px;
+}
+
+.footer__list-item {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  list-style: none;
+  margin: 0 24px;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: #000;
+}

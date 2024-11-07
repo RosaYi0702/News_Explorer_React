@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "../Header/Header";
 import SearchPage from "../SearchPage/SearchPage";
-import Main from "../Main/Main";
+import AboutAuthor from "../AboutAuthor/AboutAuthor";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -13,8 +13,7 @@ function App() {
           <Header />
           <SearchPage />
         </div>
-
-        <Main />
+        <AboutAuthor />
         <Footer />
       </div>
       <ModalWithForm />

@@ -1,0 +1,26 @@
+.about-author {
+  padding: 80px 216px 80px 104px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-author-author-img {
+}
+
+.about-author__text {
+  width: 600px;
+}
+
+.about-author__title {
+  font-family: Roboto Slab, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.about-author__paragraph {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
