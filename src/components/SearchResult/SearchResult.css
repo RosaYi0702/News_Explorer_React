@@ -1,0 +1,36 @@
+.search-result {
+  padding: 80px 96px;
+  background-color: #f5f6f7;
+}
+
+.search-result__title {
+  color: #1a1b22;
+  font-family: Roboto Slab, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  margin: 0 0 64px;
+}
+
+.search-result__cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+.search-reasult__show-more {
+  width: 288px;
+  height: 80px;
+  border-radius: 80px;
+  background-color: #e8e8e8;
+  border-style: none;
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+}
