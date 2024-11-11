@@ -17,6 +17,7 @@
   font-family: Roboto, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
+  display: flex;
 }
 
 .header__home-btn {
@@ -32,11 +33,47 @@
 .header__home-btn::after {
   content: "";
   position: absolute;
-  bottom: -26px;
+  bottom: -13px;
   left: 0%;
   width: 68px;
   height: 3px;
   background-color: #fff;
+}
+
+.header__saved-articles-btn {
+  border: none;
+  color: #b6bcbf;
+  background-color: transparent;
+  padding: 0 10px;
+  margin: 0 32px;
+  cursor: pointer;
+  position: relative;
+}
+
+.header__log-out {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 50px;
+  border-style: none;
+  outline: 1px #fff solid;
+  padding: 12px;
+  width: auto;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.header__user-name {
+  margin: 0 12px;
+}
+
+.header__log-out_img {
+  padding: 0 12px 0 0;
 }
 
 .header__sign-in-btn {
