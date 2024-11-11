@@ -1,8 +1,6 @@
 import "./App.css";
-import Header from "../Header/Header";
-import SearchPage from "../SearchPage/SearchPage";
-import AboutAuthor from "../AboutAuthor/AboutAuthor";
-import SearchResult from "../SearchResult/SearchResult";
+import HomePage from "../HomePage/HomePage";
+import SavedArticle from "../SavedArticles/SavedArticles";
 import Footer from "../Footer/Footer";
 import LogInModal from "../LogInModal/LogInModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -37,18 +35,15 @@ function App() {
             <Route
               path="/"
               element={
-                <>
-                  <div className="page__home">
-                    <Header
-                      handleSignInModal={handleSignInModal}
-                      isLoggedIn={isLoggedIn}
-                    />
-                    <SearchPage />
-                  </div>
-                  <SearchResult />
-                  <AboutAuthor />
-                </>
+                <HomePage
+                  handleSignInModal={handleSignInModal}
+                  isLoggedIn={isLoggedIn}
+                />
               }
+            ></Route>
+            <Route
+              path="/saved-news"
+              element={<SavedArticle isLoggedIn={isLoggedIn} />}
             ></Route>
           </Routes>
           <Footer />

@@ -1,7 +1,9 @@
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/WhiteLogo.png";
-import logOut from "../../assets/logout.png";
+import WhiteLogo from "../../assets/WhiteLogo.png";
+import BlackLogo from "../../assets/BlackLogo.png";
+import WhiteLogOut from "../../assets/WhiteLogOut.png";
+import BlackLogOut from "../../assets/BlackLogOut.png";
 
 function Header({ handleSignInModal, isLoggedIn }) {
   const location = useLocation();
@@ -11,23 +13,44 @@ function Header({ handleSignInModal, isLoggedIn }) {
     <header className="header">
       <nav className="header__nav">
         <Link to="/">
-          <img src={logo} alt="Logo" className="header__logo" />
+          <img
+            src={isHomePage ? WhiteLogo : BlackLogo}
+            alt="Logo"
+            className="header__logo"
+          />
         </Link>
-        <div className="header__btn">
-          <button className="header__home-btn">Home</button>
+        <div className={`header__btn `}>
+          <button
+            className={`header__home-btn ${
+              isHomePage ? "" : "header__home-btn--black"
+            }`}
+          >
+            Home
+          </button>
           {isLoggedIn ? (
             <>
-              <button className="header__saved-articles-btn">
-                Saved articles
-              </button>
-              <Link to="/saved-news" className="header__log-out">
+              <Link className="header__saved-articles" to="/saved-news">
+                <button
+                  className={`header__saved-articles-btn ${
+                    isHomePage ? "" : "header__saved-articles-btn--black"
+                  }`}
+                >
+                  Saved articles
+                </button>
+              </Link>
+
+              <button
+                className={`header__log-out ${
+                  isHomePage ? "" : "header__log-out--black"
+                }`}
+              >
                 <p className="header__user-name">Elisa</p>
                 <img
-                  src={logOut}
+                  src={isHomePage ? WhiteLogOut : BlackLogOut}
                   alt="Log Out icon"
                   className="header__log-out_img"
                 />
-              </Link>
+              </button>
             </>
           ) : (
             <button className="header__sign-in-btn" onClick={handleSignInModal}>
