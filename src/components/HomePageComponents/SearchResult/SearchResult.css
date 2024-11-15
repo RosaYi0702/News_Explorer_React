@@ -34,3 +34,20 @@
   display: block;
   cursor: pointer;
 }
+@media screen and (min-width: 320px) and (max-width: 770px) {
+  .search-result {
+    padding: 40px;
+  }
+
+  .search-result__title {
+    font-size: 30px;
+    line-height: 34px;
+    margin: 0 0 32px;
+  }
+
+  .search-reasult__show-more {
+    width: 240px;
+    height: 56px;
+    background-color: #fff;
+  }
+}

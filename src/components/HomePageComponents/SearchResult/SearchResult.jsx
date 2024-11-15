@@ -1,9 +1,9 @@
 import "./SearchResult.css";
-import { defaultNews } from "../../utils/constants";
-import NewsCard from "../NewsCard/NewsCard";
+import { defaultNews } from "../../../utils/constants";
+import NewsCard from "../../NewsCard/NewsCard";
 import { useState } from "react";
 
-function SearchResult() {
+function SearchResult({ isLoggedIn }) {
   const [visiableCard, setVisiableCard] = useState(3);
 
   const showAllCards = () => {
@@ -17,12 +17,9 @@ function SearchResult() {
     <div className="search-result">
       <h1 className="search-result__title">Search results</h1>
       <ul className="search-result__cards-list">
-        {defaultNews.slice(0, visiableCard).map((item, index) => {
+        {defaultNews.slice(0, visiableCard).map((item) => {
           return (
-            <NewsCard
-              key={`${item.source.id || `news`}-${index}`}
-              item={item}
-            />
+            <NewsCard key={`${item.url}`} item={item} isLoggedIn={isLoggedIn} />
           );
         })}
       </ul>

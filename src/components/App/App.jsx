@@ -1,12 +1,13 @@
 import "./App.css";
-import HomePage from "../HomePage/HomePage";
-import SavedArticle from "../SavedArticles/SavedArticles";
+import HomePage from "../HomePageComponents/HomePage/HomePage";
+import SavedArticle from "../SavedArticlesComponents/SavedArticles/SavedArticles";
 import Footer from "../Footer/Footer";
 import LogInModal from "../LogInModal/LogInModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -58,6 +59,12 @@ function App() {
           isOpened={activeModal === "register"}
           handleCloseModal={handleCloseModal}
           handleSwitchModal={handleSignInModal}
+        />
+        <SuccessfulModal
+          activeModal={activeModal}
+          isOpened={activeModal === "successful"}
+          handleCloseModal={handleCloseModal}
+          handleSignInModal={handleSignInModal}
         />
       </div>
     </CurrentUserContext.Provider>

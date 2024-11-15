@@ -20,13 +20,14 @@ function Header({ handleSignInModal, isLoggedIn }) {
           />
         </Link>
         <div className={`header__btn `}>
-          <button
+          <Link
+            to="/"
             className={`header__home-btn ${
               isHomePage ? "" : "header__home-btn--black"
             }`}
           >
             Home
-          </button>
+          </Link>
           {isLoggedIn ? (
             <>
               <Link className="header__saved-articles" to="/saved-news">

@@ -11,12 +11,15 @@
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
 }
 
 .header__btn {
   font-family: Roboto, Arial, sans-serif;
   font-weight: 500;
   font-size: 18px;
+  line-height: 24px;
   display: flex;
 }
 
@@ -29,6 +32,9 @@
   cursor: pointer;
   position: relative;
   font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .header__home-btn::after {
@@ -104,7 +110,7 @@
 }
 
 .header__log-out_img {
-  padding: 0 12px 0 0;
+  padding: 0;
 }
 
 .header__sign-in-btn {
@@ -117,4 +123,32 @@
   color: #fff;
   background-color: transparent;
   cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 770px) {
+  .header {
+    padding: 14px 40px;
+  }
+
+  .header__btn {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .header__saved-articles-btn {
+    padding: 0 27px;
+    width: 160px;
+  }
+
+  .header__saved-articles-btn--black::after {
+    width: 160px;
+    left: 1%;
+    bottom: -25px;
+  }
+
+  .header__log-out {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 8px 15px;
+  }
 }

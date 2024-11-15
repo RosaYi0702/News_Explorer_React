@@ -9,6 +9,7 @@ function ModalWithForm({
   handleCloseModal,
   isOpened,
   handleSwitchModal,
+  activeModal,
 }) {
   return (
     <div className={`modal ${isOpened && "modal_opened"}`}>
@@ -23,19 +24,25 @@ function ModalWithForm({
         </button>
         <h2 className="modal__title">{titleText}</h2>
         <form className="modal__form">{children}</form>
-        <button type="submit" className="modal__submit-btn">
-          {buttonText}
-        </button>
-        <div className="modal__submit_or">
-          or
-          <button
-            type="button"
-            className="modal__submit-or-btn"
-            onClick={handleSwitchModal}
-          >
-            {secondButtonText}
-          </button>
-        </div>
+        {isOpened && activeModal === "successful" ? (
+          ""
+        ) : (
+          <>
+            <button type="submit" className="modal__submit-btn">
+              {buttonText}
+            </button>
+            <div className="modal__submit_or">
+              or
+              <button
+                type="button"
+                className="modal__submit-or-btn"
+                onClick={handleSwitchModal}
+              >
+                {secondButtonText}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

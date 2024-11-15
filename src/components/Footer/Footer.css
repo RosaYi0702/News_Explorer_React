@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 104px;
 }
 
 .footer__copyright {
@@ -14,8 +15,7 @@
 
 .footer__button-list {
   display: flex;
-  width: 275px;
-  padding: 28px 104px;
+  justify-content: space-between;
 }
 
 .footer__list-item {
@@ -27,7 +27,17 @@
   margin: 0 24px;
 }
 
+.footer__list-item:last-child {
+  margin-right: 0;
+}
+
 .footer__link {
   text-decoration: none;
   color: #000;
+}
+
+@media screen and (min-width: 320px) and (max-width: 770px) {
+  .footer {
+    padding: 0 40px;
+  }
 }

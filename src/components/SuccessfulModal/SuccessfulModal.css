@@ -1,0 +1,20 @@
+.successful-modal {
+  padding: 0;
+  margin: 0;
+}
+
+.successful-modal__text {
+  margin: 9px 0;
+}
+
+.successful-modal__sign-in-btn {
+  margin: 5px 0 12px;
+  border-style: none;
+  background-color: transparent;
+  padding: 0;
+  color: #2f71e5;
+  font-size: 18px;
+  line-height: 21.78px;
+  font-family: inter, Arial, sans-serif;
+  font-weight: 400;
+}

@@ -1,5 +1,5 @@
 import "./HomePage.css";
-import Header from "../Header/Header";
+import Header from "../../Header/Header";
 import SearchPage from "../SearchPage/SearchPage";
 import AboutAuthor from "../AboutAuthor/AboutAuthor";
 import SearchResult from "../SearchResult/SearchResult";
@@ -11,7 +11,7 @@ function HomePage({ handleSignInModal, isLoggedIn }) {
         <Header handleSignInModal={handleSignInModal} isLoggedIn={isLoggedIn} />
         <SearchPage />
       </div>
-      <SearchResult />
+      <SearchResult isLoggedIn={isLoggedIn} />
       <AboutAuthor />
     </>
   );
