@@ -50,3 +50,21 @@
     line-height: 24px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .about-author {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+  }
+
+  .about-author-author-img {
+    width: 272px;
+    height: 272px;
+    margin: 0 auto;
+  }
+
+  .about-author__text {
+    width: 288px;
+  }
+}

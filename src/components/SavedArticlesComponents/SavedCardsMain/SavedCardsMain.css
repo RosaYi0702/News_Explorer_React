@@ -11,8 +11,14 @@
   padding: 0;
 }
 
-@media screen and (min-width: 320px) and (max-width: 770px) {
+@media screen and (min-width: 321px) and (max-width: 770px) {
   .saved-cards-main {
     padding: 32px 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .saved-cards-main {
+    padding: 24px 16px;
   }
 }

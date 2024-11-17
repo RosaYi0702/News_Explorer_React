@@ -13,6 +13,8 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState([]);
+  const [isLoading, setIsLodding] = useState(false);
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const handleCloseModal = () => {
     setActiveModal("");
@@ -24,6 +26,15 @@ function App() {
 
   const handleSignUpModal = () => {
     setActiveModal("register");
+  };
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
+  };
+
+  const toggleMenu = () => {
+    console.log("toggleMenu");
+    setIsMenuOpened(!isMenuOpened);
   };
 
   return (
@@ -39,12 +50,24 @@ function App() {
                 <HomePage
                   handleSignInModal={handleSignInModal}
                   isLoggedIn={isLoggedIn}
+                  isLoading={isLoading}
+                  isMenuOpened={isMenuOpened}
+                  toggleMenu={toggleMenu}
+                  handleSignOut={handleSignOut}
                 />
               }
             ></Route>
             <Route
               path="/saved-news"
-              element={<SavedArticle isLoggedIn={isLoggedIn} />}
+              element={
+                <SavedArticle
+                  isLoggedIn={isLoggedIn}
+                  isLoading={isLoading}
+                  isMenuOpened={isMenuOpened}
+                  toggleMenu={toggleMenu}
+                  handleSignOut={handleSignOut}
+                />
+              }
             ></Route>
           </Routes>
           <Footer />

@@ -4,6 +4,14 @@
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
+.header__home_menu-opened {
+  background-color: #1a1b22;
+}
+
+.header__saved-articles_menu-opened {
+  background-color: #fff;
+}
+
 .header__nav {
   display: flex;
   align-items: center;
@@ -13,6 +21,15 @@
 .header__logo {
   display: flex;
   align-items: center;
+}
+
+.header__menu {
+  background: transparent;
+  border: none;
+  display: none;
+}
+
+.header__menu-icon {
 }
 
 .header__btn {
@@ -66,6 +83,9 @@
   cursor: pointer;
   position: relative;
   font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .header__saved-articles-btn--black {
@@ -150,5 +170,28 @@
     font-size: 16px;
     line-height: 24px;
     padding: 8px 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    padding: 14px;
+  }
+
+  .header__menu {
+    display: block;
+  }
+
+  .header__menu-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header__btn,
+  .header__home-btn,
+  .header__saved-articles,
+  .header__log-out,
+  .header__sign-in-btn {
+    display: none;
   }
 }

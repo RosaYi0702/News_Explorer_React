@@ -1,6 +1,7 @@
 import "./SearchPage.css";
+import Menu from "../../Menu/Menu";
 
-function SearchPage() {
+function SearchPage({}) {
   return (
     <>
       <div className="search-page">

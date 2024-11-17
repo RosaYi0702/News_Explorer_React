@@ -15,10 +15,20 @@
 
 .footer__button-list {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
-.footer__list-item {
+.footer__text-button,
+.footer__icon-button {
+  display: flex;
+  flex-direction: row;
+  margin-left: 40px;
+  align-items: center;
+}
+
+.footer__text-button-item,
+.footer__icon-button-item {
   font-family: Roboto, Arial, sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -39,5 +49,44 @@
 @media screen and (min-width: 320px) and (max-width: 770px) {
   .footer {
     padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    padding: 20px 16px 22px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .footer__button-list {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer__text-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer__text-button-item {
+    margin: 0 0 8px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .footer__icon-button {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .footer__icon-button-item {
+    margin: 0 0 0 24px;
   }
 }
