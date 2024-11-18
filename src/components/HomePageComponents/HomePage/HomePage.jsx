@@ -11,6 +11,7 @@ function HomePage({
   isMenuOpened,
   toggleMenu,
   handleSignOut,
+  currentUser,
 }) {
   return (
     <>
@@ -21,6 +22,7 @@ function HomePage({
           isMenuOpened={isMenuOpened}
           toggleMenu={toggleMenu}
           handleSignOut={handleSignOut}
+          currentUser={currentUser}
         />
         <SearchPage isMenuOpened={isMenuOpened} isLoggedIn={isLoggedIn} />
       </div>

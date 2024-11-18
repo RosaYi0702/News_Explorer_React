@@ -3,7 +3,13 @@ import Header from "../../Header/Header";
 import SavedArticlesHeader from "../SavedArticlesHeader/SavedArticlesHeader";
 import SavedCardMain from "../SavedCardsMain/SavedCardsMain";
 
-function SavedArticle({ isLoggedIn, isMenuOpened, toggleMenu, handleSignOut }) {
+function SavedArticle({
+  isLoggedIn,
+  isMenuOpened,
+  toggleMenu,
+  handleSignOut,
+  currentUser,
+}) {
   return (
     <>
       <div className="page__saved-article">
@@ -12,8 +18,9 @@ function SavedArticle({ isLoggedIn, isMenuOpened, toggleMenu, handleSignOut }) {
           isMenuOpened={isMenuOpened}
           toggleMenu={toggleMenu}
           handleSignOut={handleSignOut}
+          currentUser={currentUser}
         />
-        <SavedArticlesHeader />
+        <SavedArticlesHeader currentUser={currentUser} />
         <SavedCardMain />
       </div>
     </>

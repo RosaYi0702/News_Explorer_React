@@ -1,12 +1,13 @@
 import "./SavedArticlesHeader.css";
+import { defaultNews } from "../../../utils/constants";
 
-function SavedArticlesHeader() {
+function SavedArticlesHeader({ currentUser }) {
   return (
     <>
       <div className="saved-articles-header">
         <h3 className="saved-articles-header__title">Saved articles</h3>
         <h1 className="saved-articles-header__news-amount">
-          Elise, you have 5 saved articles
+          {currentUser}, you have {defaultNews.length} saved articles
         </h1>
       </div>
       <p className="saved-articles-header__keywords">

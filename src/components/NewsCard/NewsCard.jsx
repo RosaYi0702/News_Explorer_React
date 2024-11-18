@@ -46,7 +46,13 @@ function NewsCard({ item, isLoggedIn }) {
           <>
             <button className="news-card__bookmark">
               <img
-                src={bookmarkIcon}
+                src={
+                  isLoggedIn
+                    ? bookmarkIcon
+                    : isBookmarkHovering
+                    ? bookmarkHover
+                    : bookmarkNormal
+                }
                 alt="booknmark"
                 className="news-card__bookmark-img"
                 onClick={handleBookmarkClick}
@@ -54,9 +60,13 @@ function NewsCard({ item, isLoggedIn }) {
                 onMouseLeave={() => setIsBookmarkHovering(false)}
               />
             </button>
-            <div className="news-card__signIn-reminder">
-              Sign in to save articles
-            </div>
+            {isLoggedIn ? (
+              ""
+            ) : (
+              <div className="news-card__signIn-reminder">
+                Sign in to save articles
+              </div>
+            )}
           </>
         ) : (
           <>

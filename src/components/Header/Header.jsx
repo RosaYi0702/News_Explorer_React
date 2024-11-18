@@ -16,6 +16,7 @@ function Header({
   isMenuOpened,
   toggleMenu,
   handleSignOut,
+  currentUser,
 }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -72,7 +73,7 @@ function Header({
                 }`}
                 onClick={handleSignOut}
               >
-                <p className="header__user-name">Elisa</p>
+                <p className="header__user-name">{currentUser}</p>
                 <img
                   src={isHomePage ? WhiteLogOut : BlackLogOut}
                   alt="Log Out icon"
@@ -91,6 +92,7 @@ function Header({
             isLoggedIn={isLoggedIn}
             toggleMenu={toggleMenu}
             handleSignInModal={handleSignInModal}
+            currentUser={currentUser}
           />
         ) : (
           ""

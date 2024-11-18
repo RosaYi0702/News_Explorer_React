@@ -4,7 +4,7 @@ import WhiteLogo from "../../assets/WhiteLogo.png";
 import Close from "../../assets/close.png";
 import WhiteLogOut from "../../assets/WhiteLogOut.png";
 
-function Menu({ isLoggedIn, toggleMenu, handleSignInModal }) {
+function Menu({ isLoggedIn, toggleMenu, handleSignInModal, currentUser }) {
   return (
     <>
       <div className="menu">
@@ -18,17 +18,21 @@ function Menu({ isLoggedIn, toggleMenu, handleSignInModal }) {
             </button>
           </div>
           <div className={`menu__btn `}>
-            <Link to="/" className="menu__home-btn">
+            <Link to="/" className="menu__home-btn" onClick={toggleMenu}>
               Home
             </Link>
             {isLoggedIn ? (
               <>
-                <Link className="menu__saved-articles-btn" to="/saved-news">
+                <Link
+                  className="menu__saved-articles-btn"
+                  to="/saved-news"
+                  onClick={toggleMenu}
+                >
                   Saved articles
                 </Link>
 
                 <button className={`menu__log-out`}>
-                  <p className="menu__user-name">Elisa</p>
+                  <p className="menu__user-name">{currentUser}</p>
                   <img
                     src={WhiteLogOut}
                     alt="Log Out icon"
@@ -37,7 +41,13 @@ function Menu({ isLoggedIn, toggleMenu, handleSignInModal }) {
                 </button>
               </>
             ) : (
-              <button className="menu__sign-in-btn" onClick={handleSignInModal}>
+              <button
+                className="menu__sign-in-btn"
+                onClick={() => {
+                  handleSignInModal();
+                  toggleMenu();
+                }}
+              >
                 Sign In
               </button>
             )}

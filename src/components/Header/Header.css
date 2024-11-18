@@ -95,7 +95,7 @@
 .header__saved-articles-btn--black::after {
   content: "";
   position: absolute;
-  bottom: -28px;
+  bottom: -13px;
   left: 15%;
   width: 178px;
   height: 3px;
@@ -163,7 +163,7 @@
   .header__saved-articles-btn--black::after {
     width: 160px;
     left: 1%;
-    bottom: -25px;
+    bottom: -14px;
   }
 
   .header__log-out {

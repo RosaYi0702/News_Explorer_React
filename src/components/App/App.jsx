@@ -11,8 +11,8 @@ import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState("Rosa");
   const [isLoading, setIsLodding] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -33,7 +33,6 @@ function App() {
   };
 
   const toggleMenu = () => {
-    console.log("toggleMenu");
     setIsMenuOpened(!isMenuOpened);
   };
 
@@ -54,6 +53,7 @@ function App() {
                   isMenuOpened={isMenuOpened}
                   toggleMenu={toggleMenu}
                   handleSignOut={handleSignOut}
+                  currentUser={currentUser}
                 />
               }
             ></Route>
@@ -66,6 +66,7 @@ function App() {
                   isMenuOpened={isMenuOpened}
                   toggleMenu={toggleMenu}
                   handleSignOut={handleSignOut}
+                  currentUser={currentUser}
                 />
               }
             ></Route>

@@ -119,3 +119,29 @@
 .modal__error_visible {
   opacity: 1;
 }
+
+@media screen and (max-width: 320px) {
+  .modal {
+    align-items: flex-end;
+  }
+
+  .modal__content {
+    width: 320px;
+    padding: 16px 17px;
+    height: 80%;
+  }
+
+  .modal__close {
+    top: -40px;
+    right: 16px;
+  }
+
+  .modal__close-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .modal__submit-btn {
+    width: 100%;
+  }
+}
