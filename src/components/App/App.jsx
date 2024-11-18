@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
+import ProectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -60,14 +61,16 @@ function App() {
             <Route
               path="/saved-news"
               element={
-                <SavedArticle
-                  isLoggedIn={isLoggedIn}
-                  isLoading={isLoading}
-                  isMenuOpened={isMenuOpened}
-                  toggleMenu={toggleMenu}
-                  handleSignOut={handleSignOut}
-                  currentUser={currentUser}
-                />
+                <ProectedRoute>
+                  <SavedArticle
+                    isLoggedIn={isLoggedIn}
+                    isLoading={isLoading}
+                    isMenuOpened={isMenuOpened}
+                    toggleMenu={toggleMenu}
+                    handleSignOut={handleSignOut}
+                    currentUser={currentUser}
+                  />
+                </ProectedRoute>
               }
             ></Route>
           </Routes>

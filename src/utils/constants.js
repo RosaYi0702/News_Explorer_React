@@ -67,3 +67,5 @@ export const defaultNews = [
       "Weve all seen them. The inspector with a clipboard, walking around a building, ticking off the last time the fire extinguishers were checked, or if all the lights are working. They work in the TICC (… [+3279 chars]",
   },
 ];
+
+export const TripleTenUrl = "https://tripleten.com/";

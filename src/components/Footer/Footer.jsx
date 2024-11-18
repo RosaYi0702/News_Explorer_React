@@ -2,6 +2,7 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 import gitHub from "../../assets/gitHub.png";
 import fb from "../../assets/fb.png";
+import { TripleTenUrl } from "../../utils/constants";
 
 function Footer() {
   return (
@@ -18,17 +19,22 @@ function Footer() {
           </li>
 
           <li className="footer__text-button-item">
-            <Link className="footer__link">TripelTen</Link>
+            <Link className="footer__link" to={TripleTenUrl}>
+              TripelTen
+            </Link>
           </li>
         </div>
         <div className="footer__icon-button">
           <li className="footer__icon-button-item">
-            <a href="" className="footer__link">
+            <a href="https://github.com/RosaYi0702" className="footer__link">
               <img src={gitHub} alt="GitHub" className="footer__social-icon" />
             </a>
           </li>
           <li className="footer__icon-button-item">
-            <a href="" className="footer__link">
+            <a
+              href="https://www.facebook.com/tripleten.tech"
+              className="footer__link"
+            >
               <img src={fb} alt="Facebook" className="footer__social-icon" />
             </a>
           </li>
