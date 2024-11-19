@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ProectedRoute({ children, anonymous = false }) {
+function ProtectedRoute({ children, anonymous = false }) {
   const location = useLocation();
   const from = location.state?.from || "/";
   const isLoggedIn = useContext(CurrentUserContext);
@@ -16,4 +16,4 @@ function ProectedRoute({ children, anonymous = false }) {
   }
 }
 
-export default ProectedRoute;
+export default ProtectedRoute;

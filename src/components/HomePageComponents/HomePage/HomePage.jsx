@@ -12,6 +12,9 @@ function HomePage({
   toggleMenu,
   handleSignOut,
   currentUser,
+  onSearch,
+  newsData,
+  hasSearchResult,
 }) {
   return (
     <>
@@ -24,9 +27,22 @@ function HomePage({
           handleSignOut={handleSignOut}
           currentUser={currentUser}
         />
-        <SearchPage isMenuOpened={isMenuOpened} isLoggedIn={isLoggedIn} />
+        <SearchPage
+          isMenuOpened={isMenuOpened}
+          isLoggedIn={isLoggedIn}
+          onSearch={onSearch}
+        />
       </div>
-      <SearchResult isLoggedIn={isLoggedIn} isLoading={isLoading} />
+      {hasSearchResult ? (
+        <SearchResult
+          isLoggedIn={isLoggedIn}
+          isLoading={isLoading}
+          newsData={newsData}
+        />
+      ) : (
+        ""
+      )}
+
       <AboutAuthor />
     </>
   );

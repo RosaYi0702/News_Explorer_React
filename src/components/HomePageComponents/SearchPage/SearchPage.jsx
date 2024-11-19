@@ -1,7 +1,23 @@
 import "./SearchPage.css";
-import Menu from "../../Menu/Menu";
+import { useState } from "react";
 
-function SearchPage({}) {
+function SearchPage({ onSearch }) {
+  const [keyword, setKeyword] = useState("");
+
+  const handleInputChange = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (!keyword.trim()) {
+      setError("Keyword cannot be empty.");
+      return;
+    }
+    onSearch(keyword);
+  };
+
   return (
     <>
       <div className="search-page">
@@ -11,13 +27,17 @@ function SearchPage({}) {
             Find the latest news on any topic and save them in your personal
             account.
           </p>
-          <form action="submit" className="search-page__search-bar">
+          <form onSubmit={handleFormSubmit} className="search-page__search-bar">
             <input
               type="text"
               className="search-page__search-input"
-              placeholder="Enter Topic"
+              placeholder={keyword === "" ? "Enter Topic" : keyword}
+              onChange={handleInputChange}
+              value={keyword}
             />
-            <button className="search-page__search-button">Search</button>
+            <button className="search-page__search-button" type="submit">
+              Search
+            </button>
           </form>
         </div>
       </div>

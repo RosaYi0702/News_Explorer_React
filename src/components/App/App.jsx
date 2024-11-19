@@ -4,18 +4,22 @@ import SavedArticle from "../SavedArticlesComponents/SavedArticles/SavedArticles
 import Footer from "../Footer/Footer";
 import LogInModal from "../LogInModal/LogInModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
-import ProectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { fetchNews } from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState("Rosa");
-  const [isLoading, setIsLodding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const [newsData, setNewsData] = useState([]);
+  const [error, setError] = useState("");
+  const [hasSearchResult, setHasSearchResult] = useState(false);
 
   const handleCloseModal = () => {
     setActiveModal("");
@@ -37,6 +41,24 @@ function App() {
     setIsMenuOpened(!isMenuOpened);
   };
 
+  const handleSearch = (keyword) => {
+    setIsLoading(true);
+    setError("");
+    setHasSearchResult(true);
+    fetchNews(keyword)
+      .then((data) => {
+        setNewsData(data.articles);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Failed to fetch newsData. Please try again.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <CurrentUserContext.Provider
       value={{ isLoggedIn, setIsLoggedIn, currentUser }}
@@ -55,13 +77,17 @@ function App() {
                   toggleMenu={toggleMenu}
                   handleSignOut={handleSignOut}
                   currentUser={currentUser}
+                  onSearch={handleSearch}
+                  newsData={newsData}
+                  error={error}
+                  hasSearchResult={hasSearchResult}
                 />
               }
             ></Route>
             <Route
-              path="/saved-news"
+              path="/saved-newsData"
               element={
-                <ProectedRoute>
+                <ProtectedRoute>
                   <SavedArticle
                     isLoggedIn={isLoggedIn}
                     isLoading={isLoading}
@@ -70,7 +96,7 @@ function App() {
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
                   />
-                </ProectedRoute>
+                </ProtectedRoute>
               }
             ></Route>
           </Routes>

@@ -1,14 +1,15 @@
 import "./SearchResult.css";
-import { defaultNews } from "../../../utils/constants";
 import NewsCard from "../../NewsCard/NewsCard";
 import { useState } from "react";
 import notFound from "../../../assets/notFound.png";
 
-function SearchResult({ isLoggedIn, isLoading }) {
+function SearchResult({ isLoggedIn, isLoading, newsData }) {
   const [visiableCard, setVisiableCard] = useState(3);
 
+  const filterNewsData = newsData.filter((item) => item.title !== "[Removed]");
+
   const showAllCards = () => {
-    setVisiableCard(defaultNews.length);
+    setVisiableCard(newsData.length);
   };
 
   const show3Cards = () => {
@@ -20,12 +21,12 @@ function SearchResult({ isLoggedIn, isLoading }) {
       {isLoading && (
         <>
           <div className="search-result__loading">
-            <span class="search-result__loading-loader"></span>
+            <span className="search-result__loading-loader"></span>
             <p className="search-result__loading-text">Searching for news...</p>
           </div>
         </>
       )}
-      {!isLoading && defaultNews.length === 0 && (
+      {!isLoading && newsData.length === 0 && (
         <>
           <div className="search-result__not-found">
             <img
@@ -40,21 +41,21 @@ function SearchResult({ isLoggedIn, isLoading }) {
           </div>{" "}
         </>
       )}
-      {!isLoading && defaultNews.length > 0 && (
+      {!isLoading && newsData.length > 0 && (
         <>
           <h1 className="search-result__title">Search results</h1>
           <ul className="search-result__cards-list">
-            {defaultNews.slice(0, visiableCard).map((item) => {
+            {filterNewsData.slice(0, visiableCard).map((item, index) => {
               return (
                 <NewsCard
-                  key={`${item.url}`}
+                  key={`${item.url}${index}`}
                   item={item}
                   isLoggedIn={isLoggedIn}
                 />
               );
             })}
           </ul>
-          {visiableCard < defaultNews.length && (
+          {visiableCard < newsData.length && (
             <button
               className="search-reasult__show-more"
               onClick={showAllCards}

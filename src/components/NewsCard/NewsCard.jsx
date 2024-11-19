@@ -6,6 +6,7 @@ import trashRegular from "../../assets/trashRegular.png";
 import trashHover from "../../assets/trashHover.png";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import notFound from "../../assets/notFound.png";
 
 function NewsCard({ item, isLoggedIn }) {
   const location = useLocation();
@@ -38,7 +39,7 @@ function NewsCard({ item, isLoggedIn }) {
     <div className="news-card">
       <div className="news-card__content">
         <img
-          src={item.urlToImage}
+          src={item.urlToImage === null ? notFound : item.urlToImage}
           alt="news image"
           className="news-card__img"
         />
