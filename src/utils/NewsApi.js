@@ -14,5 +14,9 @@ export function request(url, options) {
 }
 
 export function fetchNews(KeyWord) {
-  return fetch(KeywordsNewsUrl(KeyWord, News_API_Key)).then(checkResponse);
+  return fetch(KeywordsNewsUrl(KeyWord, News_API_Key))
+    .then(checkResponse)
+    .then((data) => {
+      return data.articles.map((article) => ({ ...article, saved: false }));
+    });
 }

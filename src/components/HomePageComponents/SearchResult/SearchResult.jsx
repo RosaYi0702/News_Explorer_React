@@ -3,7 +3,7 @@ import NewsCard from "../../NewsCard/NewsCard";
 import { useState } from "react";
 import notFound from "../../../assets/notFound.png";
 
-function SearchResult({ isLoggedIn, isLoading, newsData }) {
+function SearchResult({ isLoggedIn, isLoading, newsData, toggleSaved }) {
   const [visiableCard, setVisiableCard] = useState(3);
 
   const filterNewsData = newsData.filter((item) => item.title !== "[Removed]");
@@ -48,9 +48,10 @@ function SearchResult({ isLoggedIn, isLoading, newsData }) {
             {filterNewsData.slice(0, visiableCard).map((item, index) => {
               return (
                 <NewsCard
-                  key={`${item.url}${index}`}
+                  key={`${item.source.id}${index}`}
                   item={item}
                   isLoggedIn={isLoggedIn}
+                  toggleSaved={toggleSaved}
                 />
               );
             })}

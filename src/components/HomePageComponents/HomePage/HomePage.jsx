@@ -15,6 +15,7 @@ function HomePage({
   onSearch,
   newsData,
   hasSearchResult,
+  toggleSaved,
 }) {
   return (
     <>
@@ -38,6 +39,7 @@ function HomePage({
           isLoggedIn={isLoggedIn}
           isLoading={isLoading}
           newsData={newsData}
+          toggleSaved={toggleSaved}
         />
       ) : (
         ""

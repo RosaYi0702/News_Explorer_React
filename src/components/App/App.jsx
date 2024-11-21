@@ -9,17 +9,18 @@ import { Routes, Route } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { fetchNews } from "../../utils/api";
+import { fetchNews } from "../../utils/NewsApi";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState("Rosa");
   const [isLoading, setIsLoading] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState("");
   const [hasSearchResult, setHasSearchResult] = useState(false);
+  const [savedArticles, setSavedArticles] = useState([]);
 
   const handleCloseModal = () => {
     setActiveModal("");
@@ -41,14 +42,50 @@ function App() {
     setIsMenuOpened(!isMenuOpened);
   };
 
+  const toggleSaved = (url) => {
+    setNewsData((prevNewsData) => {
+      const updatedNewsData = prevNewsData.map((article) =>
+        article.url === url ? { ...article, saved: !article.saved } : article
+      );
+
+      const toggledArticle = updatedNewsData.find(
+        (article) => article.url === url
+      );
+
+      setSavedArticles((prevSavedArticles) => {
+        if (toggledArticle.saved) {
+          if (!prevSavedArticles.some((article) => article.url === url)) {
+            return [...prevSavedArticles, toggledArticle];
+          }
+        } else {
+          return prevSavedArticles.filter((article) => article.url !== url);
+        }
+        return prevSavedArticles;
+      });
+
+      return updatedNewsData;
+    });
+  };
+
   const handleSearch = (keyword) => {
     setIsLoading(true);
     setError("");
     setHasSearchResult(true);
     fetchNews(keyword)
       .then((data) => {
-        setNewsData(data.articles);
-        console.log(data);
+        if (Array.isArray(data)) {
+          const updateArticles = data.map((article) => ({
+            ...article,
+            saved: false,
+            keyword:
+              keyword.charAt(0).toUpperCase() + keyword.slice(1).toLowerCase(),
+          }));
+          setNewsData(updateArticles);
+          console.log("update articles", updateArticles);
+        } else {
+          setNewsData([]);
+          console.log(data.articles);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -81,11 +118,12 @@ function App() {
                   newsData={newsData}
                   error={error}
                   hasSearchResult={hasSearchResult}
+                  toggleSaved={toggleSaved}
                 />
               }
             ></Route>
             <Route
-              path="/saved-newsData"
+              path="/saved-news"
               element={
                 <ProtectedRoute>
                   <SavedArticle
@@ -95,6 +133,8 @@ function App() {
                     toggleMenu={toggleMenu}
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
+                    savedArticles={savedArticles}
+                    toggleSaved={toggleSaved}
                   />
                 </ProtectedRoute>
               }
