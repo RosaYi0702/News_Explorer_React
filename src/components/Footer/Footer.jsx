@@ -1,6 +1,6 @@
 import "./Footer.css";
 import { Link } from "react-router-dom";
-import gitHub from "../../assets/gitHub.png";
+import gitHub from "../../assets/github.png";
 import fb from "../../assets/fb.png";
 import { TripleTenUrl } from "../../utils/constants";
 
