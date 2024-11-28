@@ -40,10 +40,6 @@ function App() {
     setActiveModal("register");
   };
 
-  const handleSuccessModal = () => {
-    setActiveModal("successful");
-  };
-
   const handleSignOut = () => {
     removeToken();
     navigate("/");
@@ -115,6 +111,7 @@ function App() {
 
     signup(formData)
       .then((data) => {
+        console.log(data);
         setIsLoggedIn(true);
         setToken(data.token);
         return getUserInfo(data.token);
@@ -128,7 +125,7 @@ function App() {
         handleCloseModal();
       })
       .catch((err) => {
-        console.error("Log in fail: ", err);
+        console.error("sign up fail: ", err);
         setIsLoggedIn(false);
       });
   };
@@ -141,6 +138,7 @@ function App() {
 
     signin(formData)
       .then((data) => {
+        console.log(data);
         setIsLoggedIn(true);
         setToken(data.token);
         return getUserInfo(data.token);

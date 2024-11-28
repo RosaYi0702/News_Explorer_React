@@ -72,4 +72,4 @@ export const defaultNews = [
 
 export const TripleTenUrl = "https://tripleten.com/";
 
-export const BASE_URL = process.env.NODE_ENV === "http://localhost:3001";
+export const BASE_URL = "http://localhost:3001";

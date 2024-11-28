@@ -26,26 +26,26 @@ function ModalWithForm({
         <h2 className="modal__title">{titleText}</h2>
         <form className="modal__form" onSubmit={handleSubmit}>
           {children}
-        </form>
-        {isOpened && activeModal === "successful" ? (
-          ""
-        ) : (
-          <>
-            <button type="submit" className="modal__submit-btn">
-              {buttonText}
-            </button>
-            <div className="modal__submit_or">
-              or
-              <button
-                type="button"
-                className="modal__submit-or-btn"
-                onClick={handleSwitchModal}
-              >
-                {secondButtonText}
+          {isOpened && activeModal === "successful" ? (
+            ""
+          ) : (
+            <>
+              <button type="submit" className="modal__submit-btn">
+                {buttonText}
               </button>
-            </div>
-          </>
-        )}
+              <div className="modal__submit_or">
+                or
+                <button
+                  type="button"
+                  className="modal__submit-or-btn"
+                  onClick={handleSwitchModal}
+                >
+                  {secondButtonText}
+                </button>
+              </div>
+            </>
+          )}
+        </form>
       </div>
     </div>
   );

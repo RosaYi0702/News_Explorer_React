@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import WhiteLogo from "../../assets/WhiteLogo.png";
 import BlackLogo from "../../assets/BlackLogo.png";
-import WhiteLogOut from "../../assets/WhiteLogOut.png";
-import BlackLogOut from "../../assets/BlackLogOut.png";
+import WhiteLogout from "../../assets/WhiteLogout.png";
+import BlackLogout from "../../assets/BlackLogout.png";
 import WhiteMenu from "../../assets/WhiteMenu.png";
 import BlackMenu from "../../assets/BlackMenu.png";
 import Close from "../../assets/close.png";
@@ -75,7 +75,7 @@ function Header({
               >
                 <p className="header__user-name">{currentUser}</p>
                 <img
-                  src={isHomePage ? WhiteLogOut : BlackLogOut}
+                  src={isHomePage ? WhiteLogout : BlackLogout}
                   alt="Log Out icon"
                   className="header__log-out_img"
                 />
