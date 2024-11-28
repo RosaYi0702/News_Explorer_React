@@ -10,6 +10,7 @@ function ModalWithForm({
   isOpened,
   handleSwitchModal,
   activeModal,
+  handleSubmit,
 }) {
   return (
     <div className={`modal ${isOpened && "modal_opened"}`}>
@@ -23,7 +24,9 @@ function ModalWithForm({
           <img src={close} alt="close-btn" className="modal__close-img" />
         </button>
         <h2 className="modal__title">{titleText}</h2>
-        <form className="modal__form">{children}</form>
+        <form className="modal__form" onSubmit={handleSubmit}>
+          {children}
+        </form>
         {isOpened && activeModal === "successful" ? (
           ""
         ) : (

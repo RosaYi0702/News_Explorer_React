@@ -93,6 +93,7 @@ function Header({
             toggleMenu={toggleMenu}
             handleSignInModal={handleSignInModal}
             currentUser={currentUser}
+            handleSignOut={handleSignOut}
           />
         ) : (
           ""

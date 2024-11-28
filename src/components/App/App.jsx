@@ -10,17 +10,23 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { fetchNews } from "../../utils/NewsApi";
+import { useNavigate } from "react-router-dom";
+import { removeToken, setToken } from "../../utils/token";
+import { getToken } from "../../utils/token";
+import { signup, signin, getUserInfo } from "../../utils/auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [currentUser, setCurrentUser] = useState("Rosa");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [newsData, setNewsData] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [hasSearchResult, setHasSearchResult] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleCloseModal = () => {
     setActiveModal("");
@@ -34,7 +40,13 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleSuccessModal = () => {
+    setActiveModal("successful");
+  };
+
   const handleSignOut = () => {
+    removeToken();
+    navigate("/");
     setIsLoggedIn(false);
   };
 
@@ -69,7 +81,7 @@ function App() {
 
   const handleSearch = (keyword) => {
     setIsLoading(true);
-    setError("");
+    setError(false);
     setHasSearchResult(true);
     fetchNews(keyword)
       .then((data) => {
@@ -88,13 +100,95 @@ function App() {
         }
       })
       .catch((err) => {
-        console.error(err);
-        setError("Failed to fetch newsData. Please try again.");
+        console.error("Failed to fetch newsData. Please try again.", err);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
+
+  const handleRegister = (formData) => {
+    if (!formData.email || !formData.password || !formData.username) {
+      setError(true);
+      return;
+    }
+
+    signup(formData)
+      .then((data) => {
+        setIsLoggedIn(true);
+        setToken(data.token);
+        return getUserInfo(data.token);
+      })
+      .then((userData) => {
+        if (userData) {
+          setCurrentUser({ username: userData.username });
+        }
+      })
+      .then(() => {
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error("Log in fail: ", err);
+        setIsLoggedIn(false);
+      });
+  };
+
+  const handleLogin = (formData) => {
+    if (!formData.email || !formData.password) {
+      setError(true);
+      return;
+    }
+
+    signin(formData)
+      .then((data) => {
+        setIsLoggedIn(true);
+        setToken(data.token);
+        return getUserInfo(data.token);
+      })
+      .then((userData) => {
+        if (userData) {
+          setCurrentUser({ username: userData.username });
+        }
+      })
+      .then(() => {
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error("Log in fail: ", err);
+        setIsLoggedIn(false);
+      });
+  };
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
+  useEffect(() => {
+    const token = getToken();
+
+    if (token) {
+      getUserInfo(token)
+        .then((userData) => {
+          setIsLoggedIn(true);
+          setCurrentUser(userData);
+          console.log("User data retrieved:", userData);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch user info:", err);
+          removeToken();
+        });
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider
@@ -116,7 +210,6 @@ function App() {
                   currentUser={currentUser}
                   onSearch={handleSearch}
                   newsData={newsData}
-                  error={error}
                   hasSearchResult={hasSearchResult}
                   toggleSaved={toggleSaved}
                 />
@@ -147,11 +240,15 @@ function App() {
           isOpened={activeModal === "log-in"}
           handleCloseModal={handleCloseModal}
           handleSwitchModal={handleSignUpModal}
+          handleLogin={handleLogin}
+          error={error}
         />
         <RegisterModal
           isOpened={activeModal === "register"}
           handleCloseModal={handleCloseModal}
           handleSwitchModal={handleSignInModal}
+          handleRegister={handleRegister}
+          error={error}
         />
         <SuccessfulModal
           activeModal={activeModal}

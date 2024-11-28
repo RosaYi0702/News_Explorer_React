@@ -1,3 +1,5 @@
+import process from "process";
+
 export const defaultNews = [
   {
     source: {
@@ -69,3 +71,5 @@ export const defaultNews = [
 ];
 
 export const TripleTenUrl = "https://tripleten.com/";
+
+export const BASE_URL = process.env.NODE_ENV === "http://localhost:3001";

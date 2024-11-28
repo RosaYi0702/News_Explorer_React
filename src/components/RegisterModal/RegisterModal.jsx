@@ -1,7 +1,24 @@
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
-function RegisterModal({ isOpened, handleCloseModal, handleSwitchModal }) {
+function RegisterModal({
+  isOpened,
+  handleCloseModal,
+  handleSwitchModal,
+  handleRegister,
+  error,
+}) {
+  const { values, handleChange } = useForm({
+    email: "",
+    password: "",
+    username: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegister(values);
+  };
   return (
     <ModalWithForm
       titleText="Sign Up"
@@ -10,6 +27,7 @@ function RegisterModal({ isOpened, handleCloseModal, handleSwitchModal }) {
       handleCloseModal={handleCloseModal}
       isOpened={isOpened}
       handleSwitchModal={handleSwitchModal}
+      handleSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email
@@ -17,8 +35,10 @@ function RegisterModal({ isOpened, handleCloseModal, handleSwitchModal }) {
           className="modal__input"
           type="email"
           id="registerEmail"
-          placehodler="Email"
+          placeholder="Email"
           name="email"
+          value={values.email}
+          onChange={handleChange}
         ></input>
       </label>
       <label html="password" className="modal__label">
@@ -27,8 +47,10 @@ function RegisterModal({ isOpened, handleCloseModal, handleSwitchModal }) {
           className="modal__input"
           type="password"
           id="registerPassword"
-          placehodler="Password"
+          placeholder="Password"
           name="password"
+          value={values.password}
+          onChange={handleChange}
         ></input>
       </label>
       <label html="userName" className="modal__label">
@@ -37,11 +59,17 @@ function RegisterModal({ isOpened, handleCloseModal, handleSwitchModal }) {
           className="modal__input"
           type="text"
           id="userName"
-          placehodler="User Name"
-          name="userName"
+          placeholder="User Name"
+          name="username"
+          value={values.username}
+          onChange={handleChange}
         ></input>
       </label>
-      <span className="modal__error_center">This email is not available</span>
+      {error ? (
+        <span className="modal__error_center">This email is not available</span>
+      ) : (
+        ""
+      )}
     </ModalWithForm>
   );
 }
