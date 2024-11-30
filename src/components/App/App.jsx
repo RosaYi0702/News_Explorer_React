@@ -116,17 +116,28 @@ function App() {
         setToken(data.token);
         return getUserInfo(data.token);
       })
-      .then((userData) => {
-        if (userData) {
-          setCurrentUser({ username: userData.username });
-        }
-      })
       .then(() => {
+        setCurrentUser({ username: formData.username });
         handleCloseModal();
       })
       .catch((err) => {
-        console.error("sign up fail: ", err);
-        setIsLoggedIn(false);
+        console.error("Error:", err);
+        if (
+          err &&
+          (err.status === 404 || (err.response && err.response.status === 404))
+        ) {
+          console.warn(
+            "User info not found, setting current user with form data..."
+          );
+          setCurrentUser({ username: formData.username });
+          handleCloseModal();
+        } else if (err.message.includes("409")) {
+          console.error("Email already exists: ", err);
+          setError(true);
+        } else {
+          console.error("Sign up failed: ", err);
+          setIsLoggedIn(false);
+        }
       });
   };
 
