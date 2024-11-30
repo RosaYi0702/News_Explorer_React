@@ -126,9 +126,6 @@ function App() {
           err &&
           (err.status === 404 || (err.response && err.response.status === 404))
         ) {
-          console.warn(
-            "User info not found, setting current user with form data..."
-          );
           setCurrentUser({ username: formData.username });
           handleCloseModal();
         } else if (err.message.includes("409")) {
