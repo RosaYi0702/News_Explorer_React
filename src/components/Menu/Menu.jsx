@@ -2,7 +2,7 @@ import "./Menu.css";
 import { Link } from "react-router-dom";
 import WhiteLogo from "../../assets/WhiteLogo.png";
 import Close from "../../assets/close.png";
-import WhiteLogOut from "../../assets/WhiteLogOut.png";
+import WhiteLogout from "../../assets/WhiteLogOut.png";
 
 function Menu({
   isLoggedIn,
@@ -40,7 +40,7 @@ function Menu({
                 <button className={`menu__log-out`} onClick={handleSignOut}>
                   <p className="menu__user-name">{currentUser}</p>
                   <img
-                    src={WhiteLogOut}
+                    src={WhiteLogout}
                     alt="Log Out icon"
                     className="menu__log-out_img"
                   />
