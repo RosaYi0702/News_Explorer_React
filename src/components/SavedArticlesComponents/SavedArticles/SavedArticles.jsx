@@ -10,7 +10,8 @@ function SavedArticle({
   handleSignOut,
   currentUser,
   savedArticles,
-  toggleSaved,
+  savedArticle,
+  unsaveArticle,
 }) {
   return (
     <>
@@ -28,7 +29,8 @@ function SavedArticle({
         />
         <SavedCardMain
           savedArticles={savedArticles}
-          toggleSaved={toggleSaved}
+          savedArticle={savedArticle}
+          unsaveArticle={unsaveArticle}
         />
       </div>
     </>

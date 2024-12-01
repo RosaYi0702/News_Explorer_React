@@ -38,7 +38,7 @@ function Menu({
                 </Link>
 
                 <button className={`menu__log-out`} onClick={handleSignOut}>
-                  <p className="menu__user-name">{currentUser}</p>
+                  <p className="menu__user-name">{currentUser.username}</p>
                   <img
                     src={WhiteLogout}
                     alt="Log Out icon"

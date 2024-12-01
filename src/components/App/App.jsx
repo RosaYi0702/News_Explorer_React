@@ -9,7 +9,12 @@ import { Routes, Route } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SuccessfulModal from "../SuccessfulModal/SuccessfulModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { fetchNews } from "../../utils/NewsApi";
+import {
+  fetchNews,
+  saveArticleItem,
+  unsaveArticleItem,
+  getSavedArticles,
+} from "../../utils/NewsApi";
 import { useNavigate } from "react-router-dom";
 import { removeToken, setToken } from "../../utils/token";
 import { getToken } from "../../utils/token";
@@ -40,6 +45,10 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleSuccessfulModal = () => {
+    setActiveModal("successful");
+  };
+
   const handleSignOut = () => {
     removeToken();
     navigate("/");
@@ -50,29 +59,35 @@ function App() {
     setIsMenuOpened(!isMenuOpened);
   };
 
-  const toggleSaved = (url) => {
-    setNewsData((prevNewsData) => {
-      const updatedNewsData = prevNewsData.map((article) =>
-        article.url === url ? { ...article, saved: !article.saved } : article
-      );
+  const saveArticle = (e, url) => {
+    e.preventDefault();
+    const token = getToken();
 
-      const toggledArticle = updatedNewsData.find(
-        (article) => article.url === url
-      );
-
-      setSavedArticles((prevSavedArticles) => {
-        if (toggledArticle.saved) {
-          if (!prevSavedArticles.some((article) => article.url === url)) {
-            return [...prevSavedArticles, toggledArticle];
-          }
-        } else {
-          return prevSavedArticles.filter((article) => article.url !== url);
-        }
-        return prevSavedArticles;
+    saveArticleItem({ url }, token)
+      .then((data) => {
+        console.log(data);
+        setSavedArticles((prevSavedArticles) =>
+          prevSavedArticles.map((article) =>
+            article.url === url ? { ...article, saved: true } : article
+          )
+        );
+      })
+      .catch((err) => {
+        console.error("Failed to save article. Please try again.", err);
       });
+  };
 
-      return updatedNewsData;
-    });
+  const unsaveArticle = (id) => {
+    const token = getToken();
+    unsaveArticleItem(id, token)
+      .then((data) => {
+        setSavedArticles((prevSavedArticles) =>
+          prevSavedArticles.filter((article) => article._id !== id)
+        );
+      })
+      .catch((err) => {
+        console.error("Failed to unsave article. Please try again.", err);
+      });
   };
 
   const handleSearch = (keyword) => {
@@ -89,10 +104,8 @@ function App() {
               keyword.charAt(0).toUpperCase() + keyword.slice(1).toLowerCase(),
           }));
           setNewsData(updateArticles);
-          console.log("update articles", updateArticles);
         } else {
           setNewsData([]);
-          console.log(data.articles);
         }
       })
       .catch((err) => {
@@ -111,28 +124,34 @@ function App() {
 
     signup(formData)
       .then((data) => {
-        console.log(data);
-        setIsLoggedIn(true);
-        setToken(data.token);
-        return getUserInfo(data.token);
+        if (data?.token) {
+          setIsLoggedIn(true);
+          setToken(data.token);
+          return getUserInfo(data.token);
+        } else {
+          throw new Error("No token received during signup.");
+        }
       })
-      .then(() => {
-        setCurrentUser({ username: formData.username });
-        handleCloseModal();
+      .then((userData) => {
+        if (userData && userData.name) {
+          setCurrentUser({ name: userData.name });
+        }
+        handleSuccessfulModal();
       })
       .catch((err) => {
         console.error("Error:", err);
-        if (
-          err &&
-          (err.status === 404 || (err.response && err.response.status === 404))
-        ) {
+        if (err && (err?.status === 404 || err?.response?.status === 404)) {
           setCurrentUser({ username: formData.username });
           handleCloseModal();
-        } else if (err.message.includes("409")) {
+        } else if (
+          err &&
+          (err?.status === 409 || err?.response?.status === 409)
+        ) {
           console.error("Email already exists: ", err);
           setError(true);
         } else {
           console.error("Sign up failed: ", err);
+          setError(true);
           setIsLoggedIn(false);
         }
       });
@@ -146,14 +165,13 @@ function App() {
 
     signin(formData)
       .then((data) => {
-        console.log(data);
         setIsLoggedIn(true);
         setToken(data.token);
         return getUserInfo(data.token);
       })
       .then((userData) => {
-        if (userData) {
-          setCurrentUser({ username: userData.username });
+        if (userData && userData.name) {
+          setCurrentUser({ name: userData.name });
         }
       })
       .then(() => {
@@ -187,13 +205,23 @@ function App() {
         .then((userData) => {
           setIsLoggedIn(true);
           setCurrentUser(userData);
-          console.log("User data retrieved:", userData);
         })
         .catch((err) => {
           console.error("Failed to fetch user info:", err);
           removeToken();
         });
     }
+  }, []);
+
+  useEffect(() => {
+    const token = getToken();
+    getSavedArticles(token)
+      .then((saveArticle) => {
+        setSavedArticles(saveArticle);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch saved articles. Please try again.", err);
+      });
   }, []);
 
   return (
@@ -217,7 +245,8 @@ function App() {
                   onSearch={handleSearch}
                   newsData={newsData}
                   hasSearchResult={hasSearchResult}
-                  toggleSaved={toggleSaved}
+                  saveArticle={saveArticle}
+                  unsaveArticle={unsaveArticle}
                 />
               }
             ></Route>
@@ -233,7 +262,8 @@ function App() {
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
                     savedArticles={savedArticles}
-                    toggleSaved={toggleSaved}
+                    saveArticle={saveArticle}
+                    unsaveArticle={unsaveArticle}
                   />
                 </ProtectedRoute>
               }

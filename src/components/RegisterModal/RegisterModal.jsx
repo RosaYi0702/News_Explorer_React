@@ -17,7 +17,6 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     handleRegister(values);
   };
   return (

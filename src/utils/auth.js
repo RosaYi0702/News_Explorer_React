@@ -14,7 +14,13 @@ export const signin = ({ email, password }) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-  }).then(checkResponse);
+  })
+    .then(checkResponse)
+    .then((data) => {
+      localStorage.setItem("jwt", data.token);
+
+      return data;
+    });
 };
 
 export const getUserInfo = (token) => {

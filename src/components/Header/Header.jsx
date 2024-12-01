@@ -73,7 +73,7 @@ function Header({
                 }`}
                 onClick={handleSignOut}
               >
-                <p className="header__user-name">{currentUser}</p>
+                <p className="header__user-name">{currentUser.username}</p>
                 <img
                   src={isHomePage ? WhiteLogout : BlackLogout}
                   alt="Log Out icon"
