@@ -15,14 +15,17 @@ function NewsCard({ item, isLoggedIn, saveArticle, unsaveArticle }) {
   const [isBookmarkHovering, setIsBookmarkHovering] = useState(false);
   const [isTrashHovering, setIsTrashHovering] = useState(false);
 
-  const handleBookmarkClick = () => {
+  const handleBookmarkClick = (e) => {
+    e.preventDefault();
     if (isLoggedIn) {
-      saveArticle(item.url);
+      console.log("article", item);
+      saveArticle(item);
     }
   };
 
-  const handleTrashClick = () => {
-    unsaveArticle(item.url);
+  const handleTrashClick = (e) => {
+    e.preventDefault();
+    unsaveArticle(item);
   };
 
   const bookmarkIcon = isLoggedIn

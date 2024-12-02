@@ -2,7 +2,7 @@ import "./SavedArticlesHeader.css";
 import { defaultNews } from "../../../utils/constants";
 
 function SavedArticlesHeader({ currentUser, savedArticles }) {
-  const allkeywaords = savedArticles.flatMap((article) => article.keyword);
+  const allkeywaords = savedArticles.map((article) => article.keyword);
   const uniqueKeywords = [...new Set(allkeywaords)];
 
   const displayedKeywords = uniqueKeywords.slice(0, 2);

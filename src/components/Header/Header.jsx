@@ -1,13 +1,11 @@
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 import WhiteLogo from "../../assets/WhiteLogo.png";
 import BlackLogo from "../../assets/BlackLogo.png";
 import WhiteLogout from "../../assets/WhiteLogOut.png";
 import BlackLogout from "../../assets/BlackLogOut.png";
 import WhiteMenu from "../../assets/WhiteMenu.png";
 import BlackMenu from "../../assets/BlackMenu.png";
-import Close from "../../assets/close.png";
 import Menu from "../Menu/Menu";
 
 function Header({

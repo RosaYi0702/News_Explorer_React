@@ -59,16 +59,37 @@ function App() {
     setIsMenuOpened(!isMenuOpened);
   };
 
-  const saveArticle = (e, url) => {
-    e.preventDefault();
+  const saveArticle = (article) => {
     const token = getToken();
 
-    saveArticleItem({ url }, token)
+    const saveNewArticleItem = {
+      source: {
+        id: article.source?.id,
+        name: article.source?.name,
+      },
+      author: article.author,
+      title: article.title,
+      description: article.description,
+      url: article.url,
+      urlToImage: article.urlToImage,
+      publishedAt: article.publishedAt,
+      content: article.content,
+      keyword: article.keyword,
+    };
+
+    saveArticleItem(saveNewArticleItem, token)
       .then((data) => {
-        console.log(data);
+        console.log("new Saved article:", data);
+
         setSavedArticles((prevSavedArticles) =>
-          prevSavedArticles.map((article) =>
-            article.url === url ? { ...article, saved: true } : article
+          prevSavedArticles.map((savedArticle) =>
+            savedArticle.url === article.url
+              ? {
+                  ...savedArticle,
+                  saved: true,
+                  user: data.user,
+                }
+              : savedArticle
           )
         );
       })

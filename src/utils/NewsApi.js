@@ -28,7 +28,21 @@ export function saveArticleItem(data, token) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      source: {
+        id: data.source.id,
+        name: data.source.name,
+      },
+      author: data.author,
+      title: data.title,
+      description: data.description,
+      url: data.url,
+      urlToImage: data.urlToImage,
+      publishedAt: data.publishedAt,
+      content: data.content,
+      saved: true,
+      keyword: data.keyword,
+    }),
   }).then(checkResponse);
 }
 
