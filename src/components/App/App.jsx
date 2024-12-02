@@ -81,20 +81,18 @@ function App() {
       .then((data) => {
         console.log("new Saved article:", data);
 
-        setSavedArticles((prevSavedArticles) =>
-          prevSavedArticles.map((savedArticle) =>
-            savedArticle.url === article.url
-              ? {
-                  ...savedArticle,
-                  saved: true,
-                  user: data.user,
-                }
-              : savedArticle
-          )
-        );
+        setSavedArticles((prevSavedArticles) => [
+          ...(Array.isArray(prevSavedArticles) ? prevSavedArticles : []),
+          {
+            ...article,
+            saved: true,
+            user: data.user,
+          },
+        ]);
       })
       .catch((err) => {
         console.error("Failed to save article. Please try again.", err);
+        setSavedArticles([]);
       });
   };
 
@@ -242,6 +240,22 @@ function App() {
       })
       .catch((err) => {
         console.error("Failed to fetch saved articles. Please try again.", err);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("savedArticles updated:", savedArticles);
+  }, [savedArticles]);
+
+  useEffect(() => {
+    const token = getToken();
+    getSavedArticles(token)
+      .then((savedArticles) => {
+        setSavedArticles(Array.isArray(savedArticles) ? savedArticles : []);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch saved articles:", err);
+        setSavedArticles([]);
       });
   }, []);
 
