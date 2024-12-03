@@ -80,12 +80,15 @@ function App() {
     console.log("saveNewArticleItem:", saveNewArticleItem);
     saveArticleItem(saveNewArticleItem, token)
       .then((data) => {
-        console.log("new Saved article:", data);
+        console.log("new Saved article:", data.item);
 
-        setSavedArticles((prevSavedArticles) => [
-          data.item,
-          ...prevSavedArticles,
-        ]);
+        setSavedArticles((prevSavedArticles) => {
+          const items = prevSavedArticles.items || [];
+          return {
+            ...prevSavedArticles,
+            items: [data.item, ...items],
+          };
+        });
         console.log("savedArticles:", savedArticles);
       })
       .catch((err) => {
