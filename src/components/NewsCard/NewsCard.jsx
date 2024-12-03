@@ -8,7 +8,12 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import notFound from "../../assets/notFound.png";
 
-function NewsCard({ item, isLoggedIn, saveArticle, unsaveArticle }) {
+function NewsCard({
+  item,
+  isLoggedIn,
+  handleSaveArticle,
+  handleUnsaveArticle,
+}) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
@@ -19,13 +24,13 @@ function NewsCard({ item, isLoggedIn, saveArticle, unsaveArticle }) {
     e.preventDefault();
     if (isLoggedIn) {
       console.log("article", item);
-      saveArticle(item);
+      handleSaveArticle(item);
     }
   };
 
   const handleTrashClick = (e) => {
     e.preventDefault();
-    unsaveArticle(item);
+    handleUnsaveArticle(item);
   };
 
   const bookmarkIcon = isLoggedIn
