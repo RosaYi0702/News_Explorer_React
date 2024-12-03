@@ -7,8 +7,8 @@ function SearchResult({
   isLoggedIn,
   isLoading,
   newsData,
-  saveArticle,
-  unsaveArticle,
+  handleSaveArticle,
+  handleUnsaveArticle,
 }) {
   const [visiableCard, setVisiableCard] = useState(3);
 
@@ -57,8 +57,8 @@ function SearchResult({
                   key={`${item.source.id}${index}`}
                   item={item}
                   isLoggedIn={isLoggedIn}
-                  saveArticle={saveArticle}
-                  unsaveArticle={unsaveArticle}
+                  handleSaveArticle={handleSaveArticle}
+                  handleUnsaveArticle={handleUnsaveArticle}
                 />
               );
             })}

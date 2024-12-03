@@ -2,7 +2,11 @@ import "./SavedCardsMain.css";
 import { defaultNews } from "../../../utils/constants";
 import NewsCard from "../../NewsCard/NewsCard";
 
-function SavedCardsMain({ savedArticles, saveArticle, unsaveArticle }) {
+function SavedCardsMain({
+  savedArticles,
+  handleSaveArticle,
+  handleUnsaveArticle,
+}) {
   return (
     <>
       <div className="saved-cards-main">
@@ -12,8 +16,8 @@ function SavedCardsMain({ savedArticles, saveArticle, unsaveArticle }) {
               <NewsCard
                 key={`${item.url}`}
                 item={item}
-                saveArticle={saveArticle}
-                unsaveArticle={unsaveArticle}
+                handleSaveArticle={handleSaveArticle}
+                handleUnsaveArticle={handleUnsaveArticle}
               />
             );
           })}

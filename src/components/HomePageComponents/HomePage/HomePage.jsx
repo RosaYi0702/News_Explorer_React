@@ -15,8 +15,8 @@ function HomePage({
   onSearch,
   newsData,
   hasSearchResult,
-  saveArticle,
-  unsaveArticle,
+  handleSaveArticle,
+  handleUnsaveArticle,
 }) {
   return (
     <>
@@ -40,8 +40,8 @@ function HomePage({
           isLoggedIn={isLoggedIn}
           isLoading={isLoading}
           newsData={newsData}
-          saveArticle={saveArticle}
-          unsaveArticle={unsaveArticle}
+          handleSaveArticle={handleSaveArticle}
+          handleUnsaveArticle={handleUnsaveArticle}
         />
       ) : (
         ""

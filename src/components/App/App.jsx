@@ -35,6 +35,7 @@ function App() {
 
   const handleCloseModal = () => {
     setActiveModal("");
+    window.location.reload();
   };
 
   const handleSignInModal = () => {
@@ -59,7 +60,7 @@ function App() {
     setIsMenuOpened(!isMenuOpened);
   };
 
-  const saveArticle = (article) => {
+  const handleSaveArticle = (article) => {
     const token = getToken();
 
     const saveNewArticleItem = {
@@ -76,19 +77,16 @@ function App() {
       content: article.content,
       keyword: article.keyword,
     };
-
+    console.log("saveNewArticleItem:", saveNewArticleItem);
     saveArticleItem(saveNewArticleItem, token)
       .then((data) => {
         console.log("new Saved article:", data);
 
         setSavedArticles((prevSavedArticles) => [
-          ...(Array.isArray(prevSavedArticles) ? prevSavedArticles : []),
-          {
-            ...article,
-            saved: true,
-            user: data.user,
-          },
+          data.item,
+          ...prevSavedArticles,
         ]);
+        console.log("savedArticles:", savedArticles);
       })
       .catch((err) => {
         console.error("Failed to save article. Please try again.", err);
@@ -96,7 +94,7 @@ function App() {
       });
   };
 
-  const unsaveArticle = (id) => {
+  const handleUnsaveArticle = (id) => {
     const token = getToken();
     unsaveArticleItem(id, token)
       .then((data) => {
@@ -146,6 +144,7 @@ function App() {
         if (data?.token) {
           setIsLoggedIn(true);
           setToken(data.token);
+          console.log("data:", data);
           return getUserInfo(data.token);
         } else {
           throw new Error("No token received during signup.");
@@ -235,27 +234,11 @@ function App() {
   useEffect(() => {
     const token = getToken();
     getSavedArticles(token)
-      .then((saveArticle) => {
-        setSavedArticles(saveArticle);
+      .then((handleSaveArticle) => {
+        setSavedArticles(handleSaveArticle);
       })
       .catch((err) => {
         console.error("Failed to fetch saved articles. Please try again.", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    console.log("savedArticles updated:", savedArticles);
-  }, [savedArticles]);
-
-  useEffect(() => {
-    const token = getToken();
-    getSavedArticles(token)
-      .then((savedArticles) => {
-        setSavedArticles(Array.isArray(savedArticles) ? savedArticles : []);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch saved articles:", err);
-        setSavedArticles([]);
       });
   }, []);
 
@@ -280,8 +263,8 @@ function App() {
                   onSearch={handleSearch}
                   newsData={newsData}
                   hasSearchResult={hasSearchResult}
-                  saveArticle={saveArticle}
-                  unsaveArticle={unsaveArticle}
+                  handleSaveArticle={handleSaveArticle}
+                  handleUnsaveArticle={handleUnsaveArticle}
                 />
               }
             ></Route>
@@ -297,8 +280,8 @@ function App() {
                     handleSignOut={handleSignOut}
                     currentUser={currentUser}
                     savedArticles={savedArticles}
-                    saveArticle={saveArticle}
-                    unsaveArticle={unsaveArticle}
+                    handleSaveArticle={handleSaveArticle}
+                    handleUnsaveArticle={handleUnsaveArticle}
                   />
                 </ProtectedRoute>
               }

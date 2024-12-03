@@ -18,7 +18,6 @@ export const signin = ({ email, password }) => {
     .then(checkResponse)
     .then((data) => {
       localStorage.setItem("jwt", data.token);
-
       return data;
     });
 };
