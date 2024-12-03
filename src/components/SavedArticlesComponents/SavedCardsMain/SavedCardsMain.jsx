@@ -7,11 +7,13 @@ function SavedCardsMain({
   handleSaveArticle,
   handleUnsaveArticle,
 }) {
+  const articlesArray = savedArticles.items || [];
+  console.log(articlesArray);
   return (
     <>
       <div className="saved-cards-main">
         <ul className="saved-cards__list">
-          {savedArticles.map((item) => {
+          {articlesArray.map((item) => {
             return (
               <NewsCard
                 key={`${item.url}`}

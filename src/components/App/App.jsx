@@ -29,7 +29,7 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(false);
   const [hasSearchResult, setHasSearchResult] = useState(false);
-  const [savedArticles, setSavedArticles] = useState([]);
+  const [savedArticles, setSavedArticles] = useState({ items: [] });
 
   const navigate = useNavigate();
 
@@ -84,10 +84,8 @@ function App() {
 
         setSavedArticles((prevSavedArticles) => {
           const items = prevSavedArticles.items || [];
-          return {
-            ...prevSavedArticles,
-            items: [data.item, ...items],
-          };
+          const updatedItems = [data.item, ...items];
+          return { ...prevSavedArticles, items: updatedItems };
         });
         console.log("savedArticles:", savedArticles);
       })
@@ -99,11 +97,15 @@ function App() {
 
   const handleUnsaveArticle = (id) => {
     const token = getToken();
+    console.log("Unsave Article ID:", id);
+    console.log("Unsave Token: ", token);
     unsaveArticleItem(id, token)
-      .then((data) => {
-        setSavedArticles((prevSavedArticles) =>
-          prevSavedArticles.filter((article) => article._id !== id)
+      .then((prevSavedArticles) => {
+        const updatedItems = prevSavedArticles.items.filter(
+          (article) => article._id !== id
         );
+        console.log("handleUnsavedArticle/updateItems: ", updatedItems);
+        return { ...prevSavedArticles, items: updatedItems };
       })
       .catch((err) => {
         console.error("Failed to unsave article. Please try again.", err);

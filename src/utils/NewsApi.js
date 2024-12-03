@@ -58,6 +58,7 @@ export function unsaveArticleItem(id, token) {
 
 export function getSavedArticles(token) {
   return fetch(`${BASE_URL}/articles/saved`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

@@ -30,7 +30,7 @@ function NewsCard({
 
   const handleTrashClick = (e) => {
     e.preventDefault();
-    handleUnsaveArticle(item);
+    handleUnsaveArticle(item._id);
   };
 
   const bookmarkIcon = isLoggedIn
