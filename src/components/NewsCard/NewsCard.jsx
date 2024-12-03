@@ -19,12 +19,19 @@ function NewsCard({
 
   const [isBookmarkHovering, setIsBookmarkHovering] = useState(false);
   const [isTrashHovering, setIsTrashHovering] = useState(false);
+  const [isSaved, setIsSaved] = useState(item.saved);
 
   const handleBookmarkClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      console.log("article", item);
-      handleSaveArticle(item);
+      console.log(item.saved);
+      if (item.saved) {
+        setIsSaved(false);
+        handleUnsaveArticle(item._id);
+      } else {
+        setIsSaved(true);
+        handleSaveArticle(item);
+      }
     }
   };
 
@@ -34,7 +41,7 @@ function NewsCard({
   };
 
   const bookmarkIcon = isLoggedIn
-    ? item.saved
+    ? isSaved
       ? bookmarkMarked
       : isBookmarkHovering
       ? bookmarkHover

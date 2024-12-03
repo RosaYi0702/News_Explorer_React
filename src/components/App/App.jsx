@@ -76,6 +76,7 @@ function App() {
       publishedAt: article.publishedAt,
       content: article.content,
       keyword: article.keyword,
+      saved: true,
     };
     console.log("saveNewArticleItem:", saveNewArticleItem);
     saveArticleItem(saveNewArticleItem, token)
@@ -91,7 +92,6 @@ function App() {
       })
       .catch((err) => {
         console.error("Failed to save article. Please try again.", err);
-        setSavedArticles([]);
       });
   };
 
@@ -100,12 +100,15 @@ function App() {
     console.log("Unsave Article ID:", id);
     console.log("Unsave Token: ", token);
     unsaveArticleItem(id, token)
-      .then((prevSavedArticles) => {
-        const updatedItems = prevSavedArticles.items.filter(
-          (article) => article._id !== id
+      .then(() => {
+        const updatedItems = savedArticles.items.filter(
+          (item) => item._id !== id
         );
         console.log("handleUnsavedArticle/updateItems: ", updatedItems);
-        return { ...prevSavedArticles, items: updatedItems };
+        return setSavedArticles((prevState) => ({
+          ...prevState,
+          items: updatedItems,
+        }));
       })
       .catch((err) => {
         console.error("Failed to unsave article. Please try again.", err);
