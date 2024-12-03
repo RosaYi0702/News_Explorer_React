@@ -189,6 +189,12 @@ function App() {
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError(true);
+      return;
+    }
+
     signin(formData)
       .then((data) => {
         setIsLoggedIn(true);

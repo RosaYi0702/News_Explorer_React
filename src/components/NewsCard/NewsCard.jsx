@@ -6,6 +6,7 @@ import trashRegular from "../../assets/trashRegular.png";
 import trashHover from "../../assets/trashHover.png";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 import notFound from "../../assets/notFound.png";
 
 function NewsCard({
@@ -19,19 +20,35 @@ function NewsCard({
 
   const [isBookmarkHovering, setIsBookmarkHovering] = useState(false);
   const [isTrashHovering, setIsTrashHovering] = useState(false);
-  const [isSaved, setIsSaved] = useState(item.saved);
+  const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkNormal);
+  const [currentItem, setCurrentItem] = useState(item);
 
-  const handleBookmarkClick = (e) => {
+  const determineIcon = () => {
+    if (isLoggedIn) {
+      return item.saved
+        ? bookmarkMarked
+        : isBookmarkHovering
+        ? bookmarkHover
+        : bookmarkNormal;
+    }
+    return bookmarkNormal;
+  };
+
+  const handleBookmarkClick = async (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      console.log(item.saved);
-      if (item.saved) {
-        setIsSaved(false);
-        handleUnsaveArticle(item._id);
+      console.log(currentItem.saved);
+      console.log("currentItem ", currentItem);
+
+      if (currentItem.saved) {
+        await handleUnsaveArticle(currentItem._id);
+        console.log("Item saved status", currentItem.saved, "unsave");
       } else {
-        setIsSaved(true);
-        handleSaveArticle(item);
+        await handleSaveArticle(currentItem);
+        console.log("Item saved status", currentItem.saved, "save");
       }
+      currentItem.saved = !currentItem.saved;
+      setBookmarkIcon(determineIcon());
     }
   };
 
@@ -40,14 +57,6 @@ function NewsCard({
     handleUnsaveArticle(item._id);
   };
 
-  const bookmarkIcon = isLoggedIn
-    ? isSaved
-      ? bookmarkMarked
-      : isBookmarkHovering
-      ? bookmarkHover
-      : bookmarkNormal
-    : bookmarkNormal;
-
   const trashIcon = isTrashHovering ? trashHover : trashRegular;
 
   function formatDate(publishedAt) {
@@ -55,6 +64,11 @@ function NewsCard({
     const options = { year: "numeric", month: "long", day: "2-digit" };
     return date.toLocaleDateString("en-US", options);
   }
+
+  useEffect(() => {
+    setBookmarkIcon(determineIcon());
+  }, [isLoggedIn, currentItem.saved, isBookmarkHovering]);
+
   return (
     <div className="news-card">
       <div className="news-card__content">
@@ -72,7 +86,7 @@ function NewsCard({
               <img
                 src={
                   isLoggedIn
-                    ? bookmarkIcon
+                    ? determineIcon()
                     : isBookmarkHovering
                     ? bookmarkHover
                     : bookmarkNormal
