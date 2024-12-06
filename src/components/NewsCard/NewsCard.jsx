@@ -14,6 +14,8 @@ function NewsCard({
   isLoggedIn,
   handleSaveArticle,
   handleUnsaveArticle,
+  savedArticles,
+  setSavedArticles,
 }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -36,18 +38,47 @@ function NewsCard({
 
   const handleBookmarkClick = async (e) => {
     e.preventDefault();
-    if (isLoggedIn) {
-      console.log(currentItem.saved);
-      console.log("currentItem ", currentItem);
 
-      if (currentItem.saved) {
-        await handleUnsaveArticle(currentItem._id);
-        console.log("Item saved status", currentItem.saved, "unsave");
-      } else {
-        await handleSaveArticle(currentItem);
-        console.log("Item saved status", currentItem.saved, "save");
+    console.log("savedArticles:", savedArticles);
+    console.log("savedArticles.items:", savedArticles.items);
+    if (!isLoggedIn) return;
+
+    const savedArticle = savedArticles.items?.find(
+      (savedArticle) => savedArticle.url === currentItem.url
+    );
+
+    if (savedArticle) {
+      try {
+        await handleUnsaveArticle(savedArticle._id);
+        console.log("Item saved status", savedArticle.saved, "unsave");
+        const updatedItem = savedArticles.items.filter(
+          (article) => article._id !== savedArticle._id
+        );
+        setCurrentItem({ ...currentItem, saved: false });
+        setSavedArticles({
+          ...savedArticles,
+          items: updatedItem.filter((item) => item !== undefined),
+        });
+        setBookmarkIcon(bookmarkNormal);
+      } catch (err) {
+        console.error("Failed to unsave article: ", err);
       }
-      currentItem.saved = !currentItem.saved;
+    } else {
+      try {
+        const newArticle = await handleSaveArticle(currentItem);
+        console.log("Article saved:", newArticle);
+        setCurrentItem({ ...currentItem, saved: true });
+        setSavedArticles({
+          ...savedArticles,
+          items: [...savedArticles.items, newArticle].filter(
+            (item) => item !== undefined
+          ),
+        });
+        setBookmarkIcon(bookmarkMarked);
+      } catch (err) {
+        console.error("Failed to save article: ", err);
+      }
+
       setBookmarkIcon(determineIcon());
     }
   };
@@ -64,10 +95,6 @@ function NewsCard({
     const options = { year: "numeric", month: "long", day: "2-digit" };
     return date.toLocaleDateString("en-US", options);
   }
-
-  useEffect(() => {
-    setBookmarkIcon(determineIcon());
-  }, [isLoggedIn, currentItem.saved, isBookmarkHovering]);
 
   return (
     <div className="news-card">

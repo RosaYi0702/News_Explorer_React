@@ -279,6 +279,8 @@ function App() {
                   hasSearchResult={hasSearchResult}
                   handleSaveArticle={handleSaveArticle}
                   handleUnsaveArticle={handleUnsaveArticle}
+                  savedArticles={savedArticles}
+                  setSavedArticles={setSavedArticles}
                 />
               }
             ></Route>
@@ -296,6 +298,7 @@ function App() {
                     savedArticles={savedArticles}
                     handleSaveArticle={handleSaveArticle}
                     handleUnsaveArticle={handleUnsaveArticle}
+                    setSavedArticles={setSavedArticles}
                   />
                 </ProtectedRoute>
               }

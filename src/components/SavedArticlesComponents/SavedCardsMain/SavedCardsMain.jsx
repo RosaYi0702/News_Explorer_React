@@ -6,6 +6,7 @@ function SavedCardsMain({
   savedArticles,
   handleSaveArticle,
   handleUnsaveArticle,
+  setSavedArticles,
 }) {
   const articlesArray = savedArticles.items || [];
   console.log(articlesArray);
@@ -20,6 +21,7 @@ function SavedCardsMain({
                 item={item}
                 handleSaveArticle={handleSaveArticle}
                 handleUnsaveArticle={handleUnsaveArticle}
+                setSavedArticles={setSavedArticles}
               />
             );
           })}

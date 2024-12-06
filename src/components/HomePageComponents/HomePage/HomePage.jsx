@@ -17,6 +17,8 @@ function HomePage({
   hasSearchResult,
   handleSaveArticle,
   handleUnsaveArticle,
+  savedArticles,
+  setSavedArticles,
 }) {
   return (
     <>
@@ -42,6 +44,8 @@ function HomePage({
           newsData={newsData}
           handleSaveArticle={handleSaveArticle}
           handleUnsaveArticle={handleUnsaveArticle}
+          savedArticles={savedArticles}
+          setSavedArticles={setSavedArticles}
         />
       ) : (
         ""

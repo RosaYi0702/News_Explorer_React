@@ -9,6 +9,8 @@ function SearchResult({
   newsData,
   handleSaveArticle,
   handleUnsaveArticle,
+  savedArticles,
+  setSavedArticles,
 }) {
   const [visiableCard, setVisiableCard] = useState(3);
 
@@ -59,6 +61,8 @@ function SearchResult({
                   isLoggedIn={isLoggedIn}
                   handleSaveArticle={handleSaveArticle}
                   handleUnsaveArticle={handleUnsaveArticle}
+                  savedArticles={savedArticles}
+                  setSavedArticles={setSavedArticles}
                 />
               );
             })}

@@ -12,6 +12,7 @@ function SavedArticle({
   savedArticles,
   handleSavedArticle,
   handleUnsaveArticle,
+  setSavedArticles,
 }) {
   return (
     <>
@@ -31,6 +32,7 @@ function SavedArticle({
           savedArticles={savedArticles}
           handleSavedArticle={handleSavedArticle}
           handleUnsaveArticle={handleUnsaveArticle}
+          setSavedArticles={setSavedArticles}
         />
       </div>
     </>
