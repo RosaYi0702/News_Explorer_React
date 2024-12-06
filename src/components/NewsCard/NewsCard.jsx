@@ -25,17 +25,6 @@ function NewsCard({
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkNormal);
   const [currentItem, setCurrentItem] = useState(item);
 
-  const determineIcon = () => {
-    if (isLoggedIn) {
-      return item.saved
-        ? bookmarkMarked
-        : isBookmarkHovering
-        ? bookmarkHover
-        : bookmarkNormal;
-    }
-    return bookmarkNormal;
-  };
-
   const handleBookmarkClick = async (e) => {
     e.preventDefault();
 
@@ -47,19 +36,31 @@ function NewsCard({
       (savedArticle) => savedArticle.url === currentItem.url
     );
 
+    const determineIcon = () => {
+      if (isLoggedIn) {
+        return savedArticle
+          ? bookmarkMarked
+          : isBookmarkHovering
+          ? bookmarkHover
+          : bookmarkNormal;
+      }
+      return bookmarkNormal;
+    };
+
     if (savedArticle) {
       try {
         await handleUnsaveArticle(savedArticle._id);
-        console.log("Item saved status", savedArticle.saved, "unsave");
+
         const updatedItem = savedArticles.items.filter(
           (article) => article._id !== savedArticle._id
         );
         setCurrentItem({ ...currentItem, saved: false });
+        console.log("Item saved status", currentItem.saved, "unsave");
         setSavedArticles({
           ...savedArticles,
           items: updatedItem.filter((item) => item !== undefined),
         });
-        setBookmarkIcon(bookmarkNormal);
+        console.log("unsave / save Articles:", savedArticles);
       } catch (err) {
         console.error("Failed to unsave article: ", err);
       }
@@ -74,13 +75,12 @@ function NewsCard({
             (item) => item !== undefined
           ),
         });
-        setBookmarkIcon(bookmarkMarked);
+        console.log("save / saveArticles:", savedArticles);
       } catch (err) {
         console.error("Failed to save article: ", err);
       }
-
-      setBookmarkIcon(determineIcon());
     }
+    setBookmarkIcon(determineIcon());
   };
 
   const handleTrashClick = (e) => {
@@ -113,7 +113,7 @@ function NewsCard({
               <img
                 src={
                   isLoggedIn
-                    ? determineIcon()
+                    ? bookmarkIcon
                     : isBookmarkHovering
                     ? bookmarkHover
                     : bookmarkNormal
