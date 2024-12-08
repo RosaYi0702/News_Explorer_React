@@ -25,6 +25,17 @@ function NewsCard({
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkNormal);
   const [currentItem, setCurrentItem] = useState(item);
 
+  const determineBookmarkIcon = () => {
+    const savedArticle = savedArticles?.items?.find(
+      (savedArticle) => savedArticle.url === currentItem.url
+    );
+    return savedArticle
+      ? bookmarkMarked
+      : isBookmarkHovering
+      ? bookmarkHover
+      : bookmarkNormal;
+  };
+
   const handleBookmarkClick = async (e) => {
     e.preventDefault();
 
@@ -32,29 +43,17 @@ function NewsCard({
     console.log("savedArticles.items:", savedArticles.items);
     if (!isLoggedIn) return;
 
-    const savedArticle = savedArticles.items?.find(
+    const savedArticle = savedArticles?.items?.find(
       (savedArticle) => savedArticle.url === currentItem.url
     );
-
-    const determineIcon = () => {
-      if (isLoggedIn) {
-        return savedArticle
-          ? bookmarkMarked
-          : isBookmarkHovering
-          ? bookmarkHover
-          : bookmarkNormal;
-      }
-      return bookmarkNormal;
-    };
-
     if (savedArticle) {
       try {
         await handleUnsaveArticle(savedArticle._id);
 
-        const updatedItem = savedArticles.items.filter(
+        const updatedItem = savedArticles?.items?.filter(
           (article) => article._id !== savedArticle._id
         );
-        setCurrentItem({ ...currentItem, saved: false });
+        setCurrentItem((prev) => ({ ...prev, saved: false }));
         console.log("Item saved status", currentItem.saved, "unsave");
         setSavedArticles({
           ...savedArticles,
@@ -80,12 +79,13 @@ function NewsCard({
         console.error("Failed to save article: ", err);
       }
     }
-    setBookmarkIcon(determineIcon());
+    setBookmarkIcon(determineBookmarkIcon());
   };
 
   const handleTrashClick = (e) => {
     e.preventDefault();
     handleUnsaveArticle(item._id);
+    setIsTrashHovering(false);
   };
 
   const trashIcon = isTrashHovering ? trashHover : trashRegular;
@@ -95,6 +95,10 @@ function NewsCard({
     const options = { year: "numeric", month: "long", day: "2-digit" };
     return date.toLocaleDateString("en-US", options);
   }
+
+  useEffect(() => {
+    setBookmarkIcon(determineBookmarkIcon());
+  }, [isBookmarkHovering, savedArticles, item.url, determineBookmarkIcon]);
 
   return (
     <div className="news-card">
@@ -118,7 +122,7 @@ function NewsCard({
                     ? bookmarkHover
                     : bookmarkNormal
                 }
-                alt="booknmark"
+                alt="bookmark"
                 className="news-card__bookmark-img"
                 onMouseEnter={() => setIsBookmarkHovering(true)}
                 onMouseLeave={() => setIsBookmarkHovering(false)}
