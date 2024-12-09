@@ -20,7 +20,7 @@ function Footer() {
 
           <li className="footer__text-button-item">
             <Link className="footer__link" to={TripleTenUrl}>
-              TripelTen
+              TripleTen
             </Link>
           </li>
         </div>

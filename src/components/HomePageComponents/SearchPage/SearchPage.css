@@ -39,6 +39,10 @@
   line-height: 22px;
 }
 
+.search-page__search-input ::placeholder {
+  color: #b6bcbf;
+}
+
 .search-page__search-button {
   position: absolute;
   top: 0;

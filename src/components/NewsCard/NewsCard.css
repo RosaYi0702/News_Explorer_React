@@ -25,7 +25,7 @@
 }
 .news-card {
   width: 400px;
-  margin: 0 8px 64px;
+  margin: 0 8px 16px;
 }
 
 .news-card:first-child {
