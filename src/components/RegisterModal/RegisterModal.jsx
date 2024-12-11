@@ -41,7 +41,7 @@ function RegisterModal({
           onChange={handleChange}
         ></input>
       </label>
-      <label html="password" className="modal__label">
+      <label htmlFor="password" className="modal__label">
         Password
         <input
           className="modal__input"
@@ -53,7 +53,7 @@ function RegisterModal({
           onChange={handleChange}
         ></input>
       </label>
-      <label html="userName" className="modal__label">
+      <label htmlFor="userName" className="modal__label">
         UserName
         <input
           className="modal__input"

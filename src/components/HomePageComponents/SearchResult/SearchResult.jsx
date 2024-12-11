@@ -25,7 +25,7 @@ function SearchResult({
   };
 
   return (
-    <div className="search-result">
+    <section className="search-result">
       {isLoading && (
         <>
           <div className="search-result__loading">
@@ -82,7 +82,7 @@ function SearchResult({
           )}
         </>
       )}
-    </div>
+    </section>
   );
 }
 

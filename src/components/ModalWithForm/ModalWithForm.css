@@ -22,7 +22,7 @@
   position: relative;
   padding: 34px 36px;
   border-radius: 16px;
-  width: 430px;
+  width: 362px;
 }
 
 .modal__close {
@@ -61,8 +61,13 @@
 
 .modal__input {
   border-style: none;
-  border-bottom: #000000 1px solid;
+  border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
   width: 100%;
+}
+
+.modal__input:focus {
+  outline: none;
+  border-bottom: rgba(0, 0, 0, 1) 1px solid;
 }
 
 .modal__submit-btn {
@@ -120,9 +125,10 @@
   }
 
   .modal__content {
-    width: 320px;
+    max-width: 320px;
     padding: 16px 17px;
     height: 80%;
+    border-radius: 16px 16px 0 0;
   }
 
   .modal__close {

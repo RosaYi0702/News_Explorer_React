@@ -9,19 +9,22 @@
 .page__home {
   background-image: url(../../assets/HeaderBackground.png);
   background-repeat: no-repeat;
-  height: 576px;
+  height: 100%;
   background-position: center;
+
+  min-height: 576px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 770px) {
   .page__home {
-    max-height: 400px;
+    min-height: 400px;
+    background-size: auto 100%;
   }
 }
 
 @media screen and (max-width: 320px) {
   .page__home {
-    max-height: 536px;
+    height: 536px;
     max-width: 320px;
   }
 }

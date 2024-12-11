@@ -2,7 +2,8 @@
 }
 .search-page__content {
   margin: auto;
-  width: 608px;
+  max-width: 608px;
+  width: 100%;
 }
 .search-page__title {
   color: #fff;
@@ -81,8 +82,8 @@
   }
 
   .search-page__search-bar {
-    max-width: 452px;
     margin: 0 auto 48px;
+    max-width: 448px;
   }
   .search-page__search-input {
     height: 56px;

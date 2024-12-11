@@ -111,6 +111,7 @@
     width: 240px;
     height: 56px;
     background-color: #fff;
+    margin: 0 auto 0;
   }
 }
 
@@ -123,5 +124,12 @@
     font-size: 30px;
     line-height: 34px;
     margin: 0 0 58px;
+  }
+
+  .search-reasult__show-more {
+    width: 288px;
+    height: 56px;
+    margin: 14px auto 0;
+    background-color: #fff;
   }
 }

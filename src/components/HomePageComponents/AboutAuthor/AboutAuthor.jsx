@@ -13,10 +13,11 @@ function AboutAuthor() {
         <h1 className="about-author__title">About the author</h1>
         <p className="about-author__paragraph">
           This block describes the project author. Here you should indicate your
-          name, what you do, and which development technologies you know.{" "}
-          <br></br>
-          <br></br> You can also talk about your experience with TripleTen, what
-          you learned there, and how you can help potential customers.
+          name, what you do, and which development technologies you know.
+        </p>
+        <p className="about-author__paragraph">
+          You can also talk about your experience with TripleTen, what you
+          learned there, and how you can help potential customers.
         </p>
       </div>
     </div>

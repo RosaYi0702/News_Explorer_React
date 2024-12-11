@@ -42,7 +42,7 @@ function LogInModal({
           ""
         )}
       </label>
-      <label html="password" className="modal__label">
+      <label htmlFor="password" className="modal__label">
         Password
         <input
           className="modal__input"

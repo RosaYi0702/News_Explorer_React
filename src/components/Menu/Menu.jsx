@@ -13,7 +13,7 @@ function Menu({
 }) {
   return (
     <>
-      <div className="menu">
+      <nav className="menu">
         <div className="menu__content">
           <div className="menu__header">
             <Link to="/">
@@ -59,7 +59,7 @@ function Menu({
             )}
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 }
