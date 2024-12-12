@@ -1,6 +1,7 @@
 import "./LogInModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useState, useEffect } from "react";
 
 function LogInModal({
   isOpened,
@@ -10,6 +11,14 @@ function LogInModal({
   error,
 }) {
   const { values, handleChange } = useForm({ email: "", password: "" });
+  const [isInputEmpty, setIsInputEmpty] = useState(true);
+
+  useEffect(() => {
+    const isAnyInputEmpty = Object.values(values).some((input) => input === "");
+    console.log("Values:", values);
+    console.log("Is any input empty:", isAnyInputEmpty);
+    setIsInputEmpty(isAnyInputEmpty);
+  }, [values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +33,7 @@ function LogInModal({
       isOpened={isOpened}
       handleSwitchModal={handleSwitchModal}
       handleSubmit={handleSubmit}
+      isInputEmpty={isInputEmpty}
     >
       <label htmlFor="email" className="modal__label">
         Email

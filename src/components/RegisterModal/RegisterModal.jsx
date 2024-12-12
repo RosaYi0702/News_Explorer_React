@@ -1,6 +1,7 @@
 import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useState, useEffect } from "react";
 
 function RegisterModal({
   isOpened,
@@ -15,6 +16,13 @@ function RegisterModal({
     username: "",
   });
 
+  const [isInputEmpty, setIsInputEmpty] = useState(true);
+
+  useEffect(() => {
+    const isAnyInputEmpty = Object.values(values).some((input) => input === "");
+    setIsInputEmpty(isAnyInputEmpty);
+  }, [values]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegister(values);
@@ -28,6 +36,7 @@ function RegisterModal({
       isOpened={isOpened}
       handleSwitchModal={handleSwitchModal}
       handleSubmit={handleSubmit}
+      isInputEmpty={isInputEmpty}
     >
       <label htmlFor="email" className="modal__label">
         Email

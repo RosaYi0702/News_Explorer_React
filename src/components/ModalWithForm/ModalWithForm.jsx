@@ -11,6 +11,7 @@ function ModalWithForm({
   handleSwitchModal,
   activeModal,
   handleSubmit,
+  isInputEmpty,
 }) {
   return (
     <div className={`modal ${isOpened && "modal_opened"}`}>
@@ -30,7 +31,13 @@ function ModalWithForm({
             ""
           ) : (
             <>
-              <button type="submit" className="modal__submit-btn">
+              <button
+                type="submit"
+                className={`modal__submit-btn ${
+                  isInputEmpty ? "modal__submit-btn_disabled" : ""
+                }`}
+                disabled={isInputEmpty}
+              >
                 {buttonText}
               </button>
               <div className="modal__submit_or">
