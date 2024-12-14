@@ -79,6 +79,7 @@
 
   .about-author__text {
     width: 288px;
+    margin: 0 0 47px;
   }
 
   .about-author__title {
@@ -86,6 +87,6 @@
   }
 
   .about-author__paragraph {
-    margin: 0 0 96px;
+    margin: 0 0 24px;
   }
 }
