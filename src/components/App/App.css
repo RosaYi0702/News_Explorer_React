@@ -1,0 +1,30 @@
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.page__content {
+}
+
+.page__home {
+  background-image: url(../../assets/HeaderBackground.png);
+  background-repeat: no-repeat;
+  height: 100%;
+  background-position: center;
+
+  min-height: 576px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 770px) {
+  .page__home {
+    min-height: 400px;
+    background-size: auto 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page__home {
+    height: 536px;
+    max-width: 320px;
+  }
+}

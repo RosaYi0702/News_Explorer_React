@@ -1,0 +1,24 @@
+.saved-cards-main {
+  padding: 62px 96px 46px;
+  background-color: #f5f6f7;
+}
+
+.saved-cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 321px) and (max-width: 770px) {
+  .saved-cards-main {
+    padding: 32px 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .saved-cards-main {
+    padding: 24px 16px;
+  }
+}

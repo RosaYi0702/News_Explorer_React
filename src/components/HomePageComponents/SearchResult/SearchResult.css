@@ -1,0 +1,135 @@
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.search-result {
+  padding: 80px 96px;
+  background-color: #f5f6f7;
+}
+
+.search-result__title {
+  color: #1a1b22;
+  font-family: Roboto Slab, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  margin: 0 0 64px;
+}
+
+.search-result__cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+.search-reasult__show-more {
+  width: 288px;
+  height: 80px;
+  border-radius: 80px;
+  background-color: #e8e8e8;
+  border-style: none;
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 48px auto 0;
+  display: block;
+  cursor: pointer;
+}
+
+.search-result__loading,
+.search-result__not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.search-result__loading-loader {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 1px solid #1a1b22;
+  border-right: 1px solid #d1d2d600;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.search-result__loading-text {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+}
+
+.search-result__not-found-img {
+  margin: 6px 0;
+}
+
+.search-result__not-found-title {
+  font-family: Roboto Slab, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  color: #000;
+  margin: 25px 0 16px;
+}
+
+.search-result__not-found-paragraph {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  width: 250px;
+  margin: 0;
+}
+
+@media screen and (min-width: 321px) and (max-width: 770px) {
+  .search-result {
+    padding: 40px;
+  }
+
+  .search-result__title {
+    font-size: 30px;
+    line-height: 34px;
+    margin: 0 0 32px;
+  }
+
+  .search-reasult__show-more {
+    width: 240px;
+    height: 56px;
+    background-color: #fff;
+    margin: 0 auto 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search-result {
+    padding: 32px 16px;
+  }
+
+  .search-result__title {
+    font-size: 30px;
+    line-height: 34px;
+    margin: 0 0 58px;
+  }
+
+  .search-reasult__show-more {
+    width: 288px;
+    height: 56px;
+    margin: 14px auto 0;
+    background-color: #fff;
+  }
+}
